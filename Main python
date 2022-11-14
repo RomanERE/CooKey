@@ -1,0 +1,21 @@
+from flask import Flask, render_template, request, redirect
+
+app = Flask(__name__)
+
+
+@app.route('/' , methods=['POST', 'GET'])
+def hello_world():
+    if request.method == "POST":
+        return redirect('/new')
+    return render_template('data.html')
+
+@app.route('/new')
+def hello_new():
+    return render_template('new.html')
+
+@app.route('/about/<string:name>/<int:id>')
+def about(name,id):
+    return 'User:' + name + str(id)
+
+if __name__ == '__main__':
+    app.run()
